@@ -1,0 +1,7 @@
+Story_cyan~sol 폐기
+
+story_world 사이드 네비 수정
+
+solo.html 수정 or 폐기
+
+profile.html 수정 or 폐기

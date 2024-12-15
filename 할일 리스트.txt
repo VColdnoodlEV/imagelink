@@ -5,3 +5,8 @@ story_world 사이드 네비 수정
 solo.html 수정 or 폐기
 
 profile.html 수정 or 폐기
+
+전체적으로 world, story 페이지 가다듬기 
+
+World 쪽 배경 사진 (Colab ai 오랜만에 건드려야 할듯 )
+

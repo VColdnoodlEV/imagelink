@@ -1129,3 +1129,67 @@ nav.breadcrumb-nav ul li:last-child:after {content:"";}
     max-height: calc(100vh - 200px);
     overflow-y: auto;
 }
+.img-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.img-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.img-wrapper:hover .img-hover {
+  opacity: 1;
+}
+
+.img-wrapper:hover .img-base {
+  opacity: 0;
+}
+.img-slide-wrapper {
+  position: relative;
+  width: 100%; /* 원하는 이미지 크기로 설정 */
+  height: auto;
+  overflow: hidden;
+}
+
+.img-slide-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 기본 이미지 */
+.img-base {
+  position: relative;
+  z-index: 1;
+}
+
+/* 슬라이드 이미지 */
+.img-slide {
+  position: absolute;
+  bottom: -100%;  /* 화면 아래에 숨김 */
+  left: 0;
+  width: 100%;
+  transition: bottom 0.5s ease-in-out;
+  z-index: 2;
+}
+
+/* 마우스를 올렸을 때 슬라이드 이미지가 위로 올라옴 */
+.img-slide-wrapper:hover .img-slide {
+  bottom: 0;
+}
+
+.full-titleimg {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}

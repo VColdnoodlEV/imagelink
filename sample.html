@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>캐릭터 소개 메인</title>
+<style>
+  /* 기본 스타일 */
+  body, html {
+    margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* 캐러셀 */
+  #carousel {
+    max-width: 600px;
+    margin: 50px auto 40px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    text-align: center;
+    position: relative;
+  }
+  #carousel img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+    user-select: none;
+  }
+  #carousel h2 {
+    margin: 15px 0 10px;
+    font-size: 2rem;
+  }
+  #carousel p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  .carousel-btns {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .carousel-btns button {
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .carousel-btns button.active {
+    background: #ffcc00;
+  }
+
+  /* 카드형 링크 섹션 */
+  .card-links {
+    max-width: 1000px;
+    margin: 0 auto 70px;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+  }
+  .card {
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  .card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  .card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.4rem;
+  }
+  .card p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  .card .btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #0078d7;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  .card .btn:hover {
+    background: #005ea3;
+  }
+
+  /* 푸터 영역 썸네일 슬라이더 */
+  footer {
+    background: #111;
+    padding: 20px 0;
+  }
+  .thumbnail-slider {
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .slide-track {
+    display: flex;
+    width: calc(150px * 10); /* 썸네일 10개 반복 */
+    animation: scroll 30s linear infinite;
+  }
+  .slide-track img {
+    width: 150px;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    user-select: none;
+  }
+  .slide-track img:hover {
+    transform: scale(1.1);
+  }
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-150px * 5)); /* 5개 썸네일 너비만큼 이동 */
+    }
+  }
+
+  /* 반응형 간단 처리 */
+  @media (max-width: 600px) {
+    #carousel {
+      max-width: 90vw;
+    }
+    .card-links {
+      grid-template-columns: 1fr;
+      max-width: 90vw;
+    }
+    .slide-track img {
+      width: 100px;
+      margin: 0 5px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- 캐러셀 -->
+<section id="carousel" aria-label="캐릭터 슬라이드">
+  <img src="https://i.ibb.co/tmSp38M/character1.png" alt="캐릭터 1 이미지" id="carousel-img" draggable="false" />
+  <h2 id="carousel-name">캐릭터 이름 1</h2>
+  <p id="carousel-desc">이 캐릭터는 용감하고 정의로우며 모험을 사랑합니다.</p>
+  <div class="carousel-btns" role="tablist" aria-label="캐릭터 선택 버튼">
+    <button aria-selected="true" aria-controls="carousel-img" role="tab" class="active" data-index="0"></button>
+    <button aria-selected="false" aria-controls="carousel-img" role="tab" data-index="1"></button>
+    <button aria-selected="false" aria-controls="carousel-img" role="tab" data-index="2"></button>
+    <button aria-selected="false" aria-controls="carousel-img" role="tab" data-index="3"></button>
+    <button aria-selected="false" aria-controls="carousel-img" role="tab" data-index="4"></button>
+  </div>
+</section>
+
+<!-- 카드형 링크 섹션 -->
+<section class="card-links" aria-label="상세 페이지 링크">
+  <div class="card" tabindex="0" onclick="location.href='/world.html'" role="link" aria-label="세계관 상세 페이지로 이동">
+    <img src="https://i.ibb.co/0GtC6mW/world-thumb.jpg" alt="세계관 썸네일" />
+    <h3>세계관</h3>
+    <p>이야기의 배경과 세계 설정을 탐험하세요.</p>
+    <a href="/world.html" class="btn" tabindex="-1">더 알아보기</a>
+  </div>
+  <div class="card" tabindex="0" onclick="location.href='/profiles.html'" role="link" aria-label="캐릭터 프로필 상세 페이지로 이동">
+    <img src="https://i.ibb.co/VH9RZgL/profile-thumb.jpg" alt="캐릭터 프로필 썸네일" />
+    <h3>캐릭터 프로필</h3>
+    <p>캐릭터별 상세 프로필과 특징을 확인해 보세요.</p>
+    <a href="/profiles.html" class="btn" tabindex="-1">더 알아보기</a>
+  </div>
+  <div class="card" tabindex="0" onclick="location.href='/gallery.html'" role="link" aria-label="갤러리 상세 페이지로 이동">
+    <img src="https://i.ibb.co/Tkq4P94/gallery-thumb.jpg" alt="갤러리 썸네일" />
+    <h3>갤러리</h3>
+    <p>팬아트와 공식 아트를 감상해 보세요.</p>
+    <a href="/gallery.html" class="btn" tabindex="-1">더 알아보기</a>
+  </div>
+  <div class="card" tabindex="0" onclick="location.href='/story.html'" role="link" aria-label="스토리 상세 페이지로 이동">
+    <img src="https://i.ibb.co/WnqXnTx/story-thumb.jpg" alt="스토리 썸네일" />
+    <h3>스토리</h3>
+    <p>캐릭터들의 이야기를 깊게 알아보세요.</p>
+    <a href="/story.html" class="btn" tabindex="-1">더 알아보기</a>
+  </div>
+</section>
+
+<!-- 푸터 영역 썸네일 슬라이더 -->
+<footer>
+  <div class="thumbnail-slider" aria-label="썸네일 이미지 슬라이더">
+    <div class="slide-track">
+      <!-- 5개 이미지 반복해서 10개 만들기 (무한 루프) -->
+      <img src="https://i.ibb.co/tmSp38M/character1.png" alt="캐릭터 1 썸네일" />
+      <img src="https://i.ibb.co/VH9RZgL/profile-thumb.jpg" alt="캐릭터 2 썸네일" />
+      <img src="https://i.ibb.co/Tkq4P94/gallery-thumb.jpg" alt="캐릭터 3 썸네일" />
+      <img src="https://i.ibb.co/WnqXnTx/story-thumb.jpg" alt="캐릭터 4 썸네일" />
+      <img src="https://i.ibb.co/0GtC6mW/world-thumb.jpg" alt="캐릭터 5 썸네일" />
+      <img src="https://i.ibb.co/tmSp38M/character1.png" alt="캐릭터 1 썸네일" />
+      <img src="https://i.ibb.co/VH9RZgL/profile-thumb.jpg" alt="캐릭터 2 썸네일" />
+      <img src="https://i.ibb.co/Tkq4P94/gallery-thumb.jpg" alt="캐릭터 3 썸네일" />
+      <img src="https://i.ibb.co/WnqXnTx/story-thumb.jpg" alt="캐릭터 4 썸네일" />
+      <img src="https://i.ibb.co/0GtC6mW/world-thumb.jpg" alt="캐릭터 5 썸네일" />
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 캐러셀 데이터
+  const characters = [
+    {
+      img: "https://i.ibb.co/tmSp38M/character1.png",
+      name: "캐릭터 이름 1",
+      desc: "이 캐릭터는 용감하고 정의로우며 모험을 사랑합니다."
+    },
+    {
+      img: "https://i.ibb.co/VH9RZgL/profile-thumb.jpg",
+      name: "캐릭터 이름 2",
+      desc: "차분하고 지혜로운 성격으로 모두의 신뢰를 받습니다."
+    },
+    {
+      img: "https://i.ibb.co/Tkq4P94/gallery-thumb.jpg",
+      name: "캐릭터 이름 3",
+      desc: "유쾌하고 명랑한 분위기로 분위기 메이커 역할을 합니다."
+    },
+    {
+      img: "https://i.ibb.co/WnqXnTx/story-thumb.jpg",
+      name: "캐릭터 이름 4",
+      desc: "냉철한 전략가로 팀의 전술을 책임지고 있습니다."
+    },
+    {
+      img: "https://i.ibb.co/0GtC6mW/world-thumb.jpg",
+      name: "캐릭터 이름 5",
+      desc: "자유로운 영혼으로 예술과 음악을 사랑합니다."
+    }
+  ];
+
+  const imgEl = document.getElementById("carousel-img");
+  const nameEl = document.getElementById("carousel-name");
+  const descEl = document.getElementById("carousel-desc");
+  const btns = document.querySelectorAll(".carousel-btns button");
+
+  function setCharacter(idx) {
+    const c = characters[idx];
+    imgEl.src = c.img;
+    imgEl.alt = c.name + " 이미지";
+    nameEl.textContent = c.name;
+    descEl.textContent = c.desc;
+
+    btns.forEach((btn, i) => {
+      btn.classList.toggle("active", i === idx);
+      btn.setAttribute("aria-selected", i === idx ? "true" : "false");
+    });
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      setCharacter(parseInt(btn.dataset.index));
+    });
+  });
+
+  // 초기 표시
+  setCharacter(0);
+</script>
+
+</body>
+</html>
